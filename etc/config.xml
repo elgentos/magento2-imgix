@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <elgentos>
+            <imgix>
+                <host><![CDATA[https://drogist.imgix.net/]]></host>
+                <default_options><![CDATA[fit=crop&h=600&w=600&auto=compress]]></default_options>
+                <small_options><![CDATA[fit=crop&h=250&w=250&auto=compress]]></small_options>
+            </imgix>
+        </elgentos>
+    </default>
+</config>

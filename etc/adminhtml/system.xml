@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="elgentos" translate="label" sortOrder="100">
+            <label>Elgentos</label>
+        </tab>
+        <section id="elgentos" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Imgix</label>
+            <tab>elgentos</tab>
+            <resource>Elgentos_Imgix::config</resource>
+            <group id="imgix" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
+                   showInStore="0">
+                <label>Settings</label>
+                <field id="host" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Host url image service</label>
+                </field>
+                <field id="default_options" translate="label" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="0"
+                       showInStore="0">
+                    <label>Large image options</label>
+                </field>
+                <field id="small_options" translate="label" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="0"
+                       showInStore="0">
+                    <label>Small image options</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

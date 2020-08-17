@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Block\Product\View\Gallery">
+        <plugin name="add_images_to_gallery" type="Elgentos\Imgix\Plugin\AddImagesToGalleryBlock" />
+    </type>
+    <type name="Magento\Catalog\Block\Product\AbstractProduct">
+        <plugin name="after_get_image_plugin" type="Elgentos\Imgix\Plugin\AfterGetImage"/>
+    </type>
+    <type name="Magento\Catalog\Block\Product\Image">
+        <plugin name="after_get_image_url_plugin" type="Elgentos\Imgix\Plugin\AfterGetImageUrl"/>
+    </type>
+    <type name="\Infortis\Infortis\Helper\Image">
+        <plugin name="after_image_helper_url_plugin" type="Elgentos\Imgix\Plugin\AfterGetImageUrlHelper"/>
+    </type>
+
+</config>
