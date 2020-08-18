@@ -17,6 +17,10 @@ class AfterGetImageUrl
 
     public function after__call(\Magento\Catalog\Block\Product\Image $image, $result, $method)
     {
+        if(! $this->image->isServiceEnabled()) {
+            return $result;
+        }
+
         try {
             if ($method == 'getImageUrl' && $image->getProductId() > 0) {
                 if ($image->getHeight() < 300 || $image->getWidth() < 300) {

@@ -17,6 +17,10 @@ class AfterGetImageUrlHelper
 
     public function afterGetImageUrl($subject, $result, $product, $imageTypeId = 'product_base_image', $w = null, $h = null)
     {
+        if(! $this->image->isServiceEnabled()) {
+            return $result;
+        }
+
         if ($h < 300 || $w < 300) {
             return $this->image->getSmallUrl($result);
         }
