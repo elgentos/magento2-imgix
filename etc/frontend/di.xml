@@ -3,9 +3,6 @@
     <type name="Magento\Catalog\Block\Product\View\Gallery">
         <plugin name="add_images_to_gallery" type="Elgentos\Imgix\Plugin\AddImagesToGalleryBlock" />
     </type>
-    <type name="Magento\Catalog\Block\Product\AbstractProduct">
-        <plugin name="after_get_image_plugin" type="Elgentos\Imgix\Plugin\AfterGetImage"/>
-    </type>
     <type name="Magento\Catalog\Block\Product\Image">
         <plugin name="after_get_image_url_plugin" type="Elgentos\Imgix\Plugin\AfterGetImageUrl"/>
     </type>

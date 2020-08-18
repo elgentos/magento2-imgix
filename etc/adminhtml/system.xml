@@ -13,7 +13,12 @@
             <group id="imgix" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0"
                    showInStore="0">
                 <label>Settings</label>
-                <field id="host" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Enabled</label>
+                </field>
+                <field id="host" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1"
                        showInStore="1">
                     <label>Host url image service</label>
                 </field>

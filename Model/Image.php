@@ -39,4 +39,8 @@ class Image
             $currentUrl
         ) . '?' . $params;
     }
+
+    public function isServiceEnabled(): bool {
+        return $this->config->isEnabled();
+    }
 }

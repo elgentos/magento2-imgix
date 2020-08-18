@@ -4,9 +4,10 @@
     <default>
         <elgentos>
             <imgix>
+                <enabled>0</enabled>
                 <host><![CDATA[https://drogist.imgix.net/]]></host>
-                <default_options><![CDATA[fit=crop&h=600&w=600&auto=compress]]></default_options>
-                <small_options><![CDATA[fit=crop&h=250&w=250&auto=compress]]></small_options>
+                <default_options><![CDATA[fit=fillmax&fill=solid&fill-color=ffffff&w=500&h=500&auto=compress&auto=format]]></default_options>
+                <small_options><![CDATA[fit=fillmax&fill=solid&fill-color=ffffff&w=240&h=240&auto=compress&auto=format]]></small_options>
             </imgix>
         </elgentos>
     </default>

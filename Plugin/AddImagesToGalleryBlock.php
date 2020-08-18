@@ -1,5 +1,5 @@
 <?php
-
+//?fit=crop&h=250&w=250&auto=compress&trim-color=ffffff&trim=color&trim-tol=5
 namespace Elgentos\Imgix\Plugin;
 
 use Magento\Catalog\Block\Product\View\Gallery;
@@ -35,12 +35,16 @@ class AddImagesToGalleryBlock
 
     public function afterGetGalleryImages(Gallery $subject, $images)
     {
+        if(! $this->image->isServiceEnabled()) {
+            return $images;
+        }
+
         try {
             foreach ($images as $image) {
                 $image->setUrl($this->image->getDefaultUrl($image->getUrl()));
-                $image->setSmallImageUrl($this->image->getSmallUrl($image->getSmallImageUrl()));
-                $image->setMediumImageUrl($this->image->getDefaultUrl($image->getMediumImageUrl()));
-                $image->setLargeImageUrl($this->image->getDefaultUrl($image->getMediumImageUrl()));
+                $image->setSmallImageUrl($this->image->getSmallUrl($image->getLargeImageUrl()));
+                $image->setMediumImageUrl($this->image->getDefaultUrl($image->getLargeImageUrl()));
+                $image->setLargeImageUrl($this->image->getDefaultUrl($image->getLargeImageUrl()));
             }
 
             return $images;
