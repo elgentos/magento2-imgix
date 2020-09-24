@@ -1,0 +1,21 @@
+{
+    "name": "elgentos/magento2-imgix",
+    "description": "Imgix extension for Magento 2 to process images",
+    "type": "magento2-module",
+    "authors": [
+        {
+            "name": "elgentos",
+            "email": "info@elgentos.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Elgentos\\Kiyoh\\": ""
+        },
+        "files": [
+            "registration.php"
+        ]
+    }
+
+}
