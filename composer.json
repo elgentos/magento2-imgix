@@ -8,6 +8,9 @@
             "email": "info@elgentos.nl"
         }
     ],
+    "require": {
+        "imgix/imgix-php": "^3.3.0"
+    },
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
