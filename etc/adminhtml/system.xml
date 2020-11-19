@@ -22,7 +22,7 @@
                        showInStore="1">
                     <label>Host url image service</label>
                 </field>
-                <field id="secure_urls_token" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1"
+                <field id="secure_sign_key" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1"
                        showInStore="1">
                     <label>Secure Images Sign Key</label>
                     <comment>See https://docs.imgix.com/setup/securing-images</comment>
