@@ -1,6 +1,6 @@
 <?php
 
-namespace Elgentos\Imgix\Model\CatalogGraphQl;
+namespace Elgentos\Imgix\Plugin\CatalogGraphQl;
 
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;

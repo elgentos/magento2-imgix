@@ -6,11 +6,7 @@
     <type name="Magento\Catalog\Block\Product\Image">
         <plugin name="after_get_image_url_plugin" type="Elgentos\Imgix\Plugin\AfterGetImageUrl"/>
     </type>
-    <type name="\Infortis\Infortis\Helper\Image">
+    <type name="Infortis\Infortis\Helper\Image">
         <plugin name="after_image_helper_url_plugin" type="Elgentos\Imgix\Plugin\AfterGetImageUrlHelper"/>
     </type>
-    <type name="\Magento\CatalogGraphQl\Model\Resolver\Product\MediaGallery\Url">
-        <plugin name="after_catalog_graphql_url_plugin" type="Elgentos\Imgix\Plugin\CatalogGraphQl\AfterGetImageUrl"/>
-    </type>
-
 </config>
