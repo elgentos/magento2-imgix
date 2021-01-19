@@ -1,12 +1,15 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Catalog\Block\Product\View\Gallery">
-        <plugin name="add_images_to_gallery" type="Elgentos\Imgix\Plugin\AddImagesToGalleryBlock" />
+        <plugin name="imgix_add_images_to_gallery" type="Elgentos\Imgix\Plugin\AddImagesToGalleryBlock" />
     </type>
     <type name="Magento\Catalog\Block\Product\Image">
-        <plugin name="after_get_image_url_plugin" type="Elgentos\Imgix\Plugin\AfterGetImageUrl"/>
+        <plugin name="imgix_after_get_image_url_plugin" type="Elgentos\Imgix\Plugin\AfterGetImageUrl"/>
     </type>
     <type name="Infortis\Infortis\Helper\Image">
-        <plugin name="after_image_helper_url_plugin" type="Elgentos\Imgix\Plugin\AfterGetImageUrlHelper"/>
+        <plugin name="imgix_after_image_helper_url_plugin" type="Elgentos\Imgix\Plugin\AfterGetImageUrlHelper"/>
+    </type>
+    <type name="Magento\Search\Model\Autocomplete">
+        <plugin name="imgix_after_search_ajax_suggest" type="Elgentos\Imgix\Plugin\Search\Autocomplete"/>
     </type>
 </config>

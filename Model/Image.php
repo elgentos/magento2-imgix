@@ -32,12 +32,24 @@ class Image
         return $this->getServiceUrl($currentUrl, $this->config->getConfigValue(Config::XPATH_FIELD_SMALL));
     }
 
+    public function getAutoCompleteUrl(string $currentUrl): string
+    {
+        return $this->getServiceUrl($currentUrl, $this->config->getConfigValue(Config::XPATH_FIELD_AUTOCOMPLETE));
+    }
+
     public function getServiceUrl(string $currentUrl, string $params): string
     {
+        if(! $this->isServiceEnabled()) {
+            return $currentUrl;
+        }
+
+        $serviceUrl = $this->config->getConfigValue(Config::XPATH_FIELD_SERVICE_URL);
+        if(empty($serviceUrl)) {
+            return $currentUrl;
+        }
+
         return str_replace($this->storeManager->getStore()->getBaseUrl(),
-            $this->config->getConfigValue(Config::XPATH_FIELD_SERVICE_URL),
-            $currentUrl
-        ) . '?' . $params;
+            $serviceUrl, $currentUrl) . '?' . $params;
     }
 
     public function isServiceEnabled(): bool {
