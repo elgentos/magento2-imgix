@@ -37,6 +37,11 @@
                        showInStore="0">
                     <label>Small image options</label>
                 </field>
+                <field id="autocomplete_options" translate="label" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="0"
+                       showInStore="0">
+                    <label>Search autocomplete options</label>
+                </field>
             </group>
         </section>
     </system>

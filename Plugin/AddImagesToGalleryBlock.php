@@ -1,5 +1,5 @@
 <?php
-//?fit=crop&h=250&w=250&auto=compress&trim-color=ffffff&trim=color&trim-tol=5
+
 namespace Elgentos\Imgix\Plugin;
 
 use Magento\Catalog\Block\Product\View\Gallery;
