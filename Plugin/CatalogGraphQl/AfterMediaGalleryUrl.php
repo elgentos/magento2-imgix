@@ -31,6 +31,10 @@ class AfterMediaGalleryUrl
             return $result;
         }
 
+        if(! $this->image->isServiceEnabled()) {
+            return $result;
+        }
+
         if (isset($value['image_type'])) {
             if($value['image_type'] ==  'small_image' || $value['image_type'] ==  'thumbnail') {
                 return $this->image->getSmallUrl($result);
