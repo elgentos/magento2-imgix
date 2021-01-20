@@ -6,7 +6,7 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Autocomplete
 {
-    private \Elgentos\Imgix\Model\Image $image;
+    private $image;
 
     public function __construct(
         \Elgentos\Imgix\Model\Image $image
