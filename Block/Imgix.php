@@ -32,7 +32,7 @@ class Imgix extends Template
     }
 
     public function getHost() {
-        return $this->config->getConfigValue(null, null, $this->storeManager->getStore()->getId());
+        return $this->config->getConfigValue('elgentos/imgix/host', null, $this->storeManager->getStore()->getId());
     }
 
     /**
