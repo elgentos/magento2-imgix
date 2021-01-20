@@ -31,8 +31,12 @@ class Imgix extends Template
         parent::__construct($context, $data);
     }
 
-    public function getHost() {
-        return $this->config->getConfigValue('elgentos/imgix/host', null, $this->storeManager->getStore()->getId());
+   public function getHost() {
+        return $this->config->getConfigValue(
+            $this->config::XPATH_FIELD_SERVICE_URL,
+            $this->config::XML_PATH,
+            $this->storeManager->getStore()->getId()
+        );
     }
 
     /**
