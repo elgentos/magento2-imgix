@@ -22,6 +22,9 @@ class Autocomplete
         }
 
         foreach ($resultItems as $item) {
+            if(! $item->getData('image')) {
+                continue;
+            }
             $item->setData('image', $this->image->getAutoCompleteUrl($item->getData('image')));
         }
 
