@@ -30,7 +30,7 @@
                 <field id="default_options" translate="label" type="text" sortOrder="20" showInDefault="1"
                        showInWebsite="0"
                        showInStore="0">
-                    <label>Large image options</label>
+                    <label>Default image options</label>
                 </field>
                 <field id="small_options" translate="label" type="text" sortOrder="30" showInDefault="1"
                        showInWebsite="0"
