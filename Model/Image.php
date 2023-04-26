@@ -22,11 +22,6 @@ class Image
         $this->storeManager = $storeManager;
     }
 
-    public function getDefaultUrl(string $currentUrl): string
-    {
-        return $this->getServiceUrl($currentUrl, $this->config->getConfigValue(Config::XPATH_FIELD_DEFAULT));
-    }
-
     public function getCustomUrl(string $imageUrl, int $width, int $height): string
     {
         return $this->getServiceUrl($imageUrl, $this->config->getConfigValue(Config::XPATH_FIELD_DEFAULT));
