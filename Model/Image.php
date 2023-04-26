@@ -24,18 +24,14 @@ class Image
 
     public function getDefaultUrl(string $currentUrl): string
     {
-        return $this->getServiceUrl($currentUrl, $this->config->getConfigValue(Config::XPATH_FIELD_LARGE));
+        return $this->getServiceUrl($currentUrl, $this->config->getConfigValue(Config::XPATH_FIELD_DEFAULT));
     }
 
-    public function getSmallUrl(string $currentUrl): string
+    public function getCustomUrl(string $imageUrl, int $width, int $height): string
     {
-        return $this->getServiceUrl($currentUrl, $this->config->getConfigValue(Config::XPATH_FIELD_SMALL));
+        return $this->getServiceUrl($imageUrl, $this->config->getConfigValue(Config::XPATH_FIELD_DEFAULT));
     }
 
-    public function getAutoCompleteUrl(string $currentUrl): string
-    {
-        return $this->getServiceUrl($currentUrl, $this->config->getConfigValue(Config::XPATH_FIELD_AUTOCOMPLETE));
-    }
 
     public function getServiceUrl(string $currentUrl, string $params): string
     {

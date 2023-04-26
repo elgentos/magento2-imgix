@@ -3,6 +3,7 @@
 namespace Elgentos\Imgix\Plugin;
 
 use Magento\Framework\Exception\NoSuchEntityException;
+use Elgentos\Imgix\Helper\ViewConfigHelper as ViewConfig;
 
 class AfterGetImageUrl
 {
@@ -21,14 +22,21 @@ class AfterGetImageUrl
      */
     protected $imageHelperFactory;
 
+    /**
+     * @var ViewConfig
+     */
+    protected $viewConfigHelper;
+
     public function __construct(
         \Elgentos\Imgix\Model\Image $image,
         \Magento\Catalog\Api\ProductRepositoryInterface $productRepository,
-        \Magento\Catalog\Helper\ImageFactory $imageHelperFactory
+        \Magento\Catalog\Helper\ImageFactory $imageHelperFactory,
+        ViewConfig $viewConfigHelper
     ) {
         $this->image = $image;
         $this->productRepository = $productRepository;
         $this->imageHelperFactory = $imageHelperFactory;
+        $this->viewConfigHelper = $viewConfigHelper;
     }
 
     public function after__call(\Magento\Catalog\Block\Product\Image $image, $result, $method)
@@ -39,15 +47,21 @@ class AfterGetImageUrl
 
         try {
             if ($method == 'getImageUrl' && $image->getProductId() > 0) {
-                if ($image->getHeight() < 300 || $image->getWidth() < 300) {
-                    $defaultImage = $this->getDefaultImageUrl($image->getProductId());
-                    if(! $defaultImage) {
-                        return $result;
-                    }
-                    return $this->image->getSmallUrl($defaultImage);
+                $imageId = $image->getImageId();
+                if (!$imageId) {
+                    return $result;
                 }
-                return $this->image->getDefaultUrl($result);
+
+                $dimensions = $this->viewConfigHelper->getImageSize($imageId);
+
+                $defaultImage = $this->getDefaultImageUrl($image->getProductId());
+                if (!$defaultImage) {
+                    return $result;
+                }
+
+                return $this->image->getCustomUrl($defaultImage, $dimensions['width'], $dimensions['height']);
             }
+
         } catch (\Exception $e) {
         }
 

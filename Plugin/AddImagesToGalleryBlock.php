@@ -3,9 +3,8 @@
 namespace Elgentos\Imgix\Plugin;
 
 use Magento\Catalog\Block\Product\View\Gallery;
-use Magento\Framework\Data\Collection;
 use Magento\Framework\Data\CollectionFactory;
-use Magento\Framework\DataObject;
+use Elgentos\Imgix\Helper\ViewConfigHelper;
 
 class AddImagesToGalleryBlock
 {
@@ -20,31 +19,68 @@ class AddImagesToGalleryBlock
     protected $image;
 
     /**
+     * @var ViewConfigHelper
+     */
+    protected $viewConfigHelper;
+
+    /**
      * AddImagesToGalleryBlock constructor.
      *
      * @param \Elgentos\Imgix\Model\Image $image
      * @param CollectionFactory $dataCollectionFactory
+     * @param ViewConfigHelper $viewConfigHelper
      */
     public function __construct(
         \Elgentos\Imgix\Model\Image $image,
-        CollectionFactory $dataCollectionFactory
+        CollectionFactory $dataCollectionFactory,
+        ViewConfigHelper $viewConfigHelper
     ) {
         $this->dataCollectionFactory = $dataCollectionFactory;
         $this->image = $image;
+        $this->viewConfigHelper = $viewConfigHelper;
     }
 
     public function afterGetGalleryImages(Gallery $subject, $images)
     {
-        if(! $this->image->isServiceEnabled()) {
+        if (!$this->image->isServiceEnabled()) {
             return $images;
         }
 
         try {
+            $imageIds = [
+                'small'  => 'product_page_image_small',
+                'medium' => 'product_page_image_medium',
+                'large'  => 'product_page_image_large'
+            ];
+
             foreach ($images as $image) {
-                $image->setUrl($this->image->getDefaultUrl($image->getUrl()));
-                $image->setSmallImageUrl($this->image->getSmallUrl($image->getLargeImageUrl()));
-                $image->setMediumImageUrl($this->image->getDefaultUrl($image->getLargeImageUrl()));
-                $image->setLargeImageUrl($this->image->getDefaultUrl($image->getLargeImageUrl()));
+                $existingImageId = $image->getImageId();
+
+                if ($existingImageId) {
+                    $dimensions = $this->viewConfigHelper->getImageSize($existingImageId);
+                    $imgixUrl = $this->image->getCustomUrl($image->getUrl(), $dimensions['width'], $dimensions['height']);
+                    $image->setUrl($imgixUrl);
+                } else {
+                    foreach ($imageIds as $size => $imageId) {
+                        $dimensions = $this->viewConfigHelper->getImageSize($imageId);
+                        $imgixUrl = $this->image->getCustomUrl($image->getUrl(), $dimensions['width'], $dimensions['height']);
+
+                        switch ($size) {
+                            case 'small':
+                                $image->setSmallImageUrl($imgixUrl);
+                                break;
+                            case 'medium':
+                                $image->setMediumImageUrl($imgixUrl);
+                                break;
+                            case 'large':
+                                $image->setLargeImageUrl($imgixUrl);
+                                break;
+                            default:
+                                $image->setUrl($imgixUrl);
+                                break;
+                        }
+                    }
+                }
             }
 
             return $images;
@@ -52,4 +88,5 @@ class AddImagesToGalleryBlock
             return $images;
         }
     }
+
 }

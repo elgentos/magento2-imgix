@@ -10,8 +10,7 @@ class Config
 
     const XPATH_FIELD_ENABLED = 'enabled';
     const XPATH_FIELD_SERVICE_URL = 'host';
-    const XPATH_FIELD_SMALL = 'small_options';
-    const XPATH_FIELD_LARGE = 'default_options';
+    const XPATH_FIELD_DEFAULT = 'default_options';
     const XPATH_FIELD_AUTOCOMPLETE = 'autocomplete_options';
     const XPATH_FIELD_SIGN_KEY = 'secure_sign_key';
 
