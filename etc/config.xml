@@ -5,8 +5,6 @@
         <elgentos>
             <imgix>
                 <enabled>0</enabled>
-                <default_options><![CDATA[fit=fillmax&fill=solid&fill-color=ffffff&auto=compress&auto=format]]></default_options>
-                <autocomplete_options><![CDATA[fit=fillmax&fill=solid&fill-color=ffffff&w=50&h=50&auto=compress&auto=format]]></autocomplete_options>
             </imgix>
         </elgentos>
     </default>
