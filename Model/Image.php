@@ -24,7 +24,7 @@ class Image
 
     public function getCustomUrl(string $imageUrl, int $width, int $height): string
     {
-        return $this->getServiceUrl($imageUrl, 'w=' . $dimensions['width'] . '&h=' . $dimensions['height'] . '&auto=compress&auto=format');
+        return $this->getServiceUrl($imageUrl, 'w=' . $width . '&h=' . $height . '&auto=compress&auto=format');
     }
 
     public function getServiceUrl(string $currentUrl, string $params): string
