@@ -12,10 +12,17 @@ class AfterMediaGalleryUrl
      */
     private $image;
 
+    /**
+     * @var \Elgentos\Imgix\Helper\ViewConfigHelper
+     */
+    private $viewConfigHelper;
+
     public function __construct(
-        \Elgentos\Imgix\Model\Image $image
+        \Elgentos\Imgix\Model\Image $image,
+        \Elgentos\Imgix\Helper\ViewConfigHelper $viewConfigHelper
     ) {
         $this->image = $image;
+        $this->viewConfigHelper = $viewConfigHelper;
     }
 
     public function afterResolve(
@@ -27,21 +34,19 @@ class AfterMediaGalleryUrl
         array $value = null,
         array $args = null
     ) {
-        if(empty($result)) {
+        if (empty($result)) {
             return $result;
         }
 
-        if(! $this->image->isServiceEnabled()) {
+        if (! $this->image->isServiceEnabled()) {
             return $result;
         }
 
-        if (isset($value['image_type'])) {
-            if($value['image_type'] ==  'small_image' || $value['image_type'] ==  'thumbnail') {
-                return $this->image->getSmallUrl($result);
-            }
-            return $this->image->getDefaultUrl($result);
-        } elseif (isset($value['file'])) {
-            return $this->image->getDefaultUrl($result);
-        }
+        $imageId = isset($value['image_type']) ? $value['image_type'] : 'product_page_image_small';
+
+        $dimensions = $this->viewConfigHelper->getImageSize($imageId);
+        $imgixUrl = $this->image->getCustomUrl($result, $dimensions['width'], $dimensions['height']);
+
+        return $imgixUrl;
     }
 }

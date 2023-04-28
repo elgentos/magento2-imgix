@@ -6,9 +6,6 @@
     <type name="Magento\Catalog\Block\Product\Image">
         <plugin name="imgix_after_get_image_url_plugin" type="Elgentos\Imgix\Plugin\AfterGetImageUrl"/>
     </type>
-    <type name="Infortis\Infortis\Helper\Image">
-        <plugin name="imgix_after_image_helper_url_plugin" type="Elgentos\Imgix\Plugin\AfterGetImageUrlHelper"/>
-    </type>
     <type name="Magento\Search\Model\Autocomplete">
         <plugin name="imgix_after_search_ajax_suggest" type="Elgentos\Imgix\Plugin\Search\Autocomplete"/>
     </type>

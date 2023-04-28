@@ -22,19 +22,9 @@ class Image
         $this->storeManager = $storeManager;
     }
 
-    public function getDefaultUrl(string $currentUrl): string
+    public function getCustomUrl(string $imageUrl, int $width, int $height): string
     {
-        return $this->getServiceUrl($currentUrl, $this->config->getConfigValue(Config::XPATH_FIELD_LARGE));
-    }
-
-    public function getSmallUrl(string $currentUrl): string
-    {
-        return $this->getServiceUrl($currentUrl, $this->config->getConfigValue(Config::XPATH_FIELD_SMALL));
-    }
-
-    public function getAutoCompleteUrl(string $currentUrl): string
-    {
-        return $this->getServiceUrl($currentUrl, $this->config->getConfigValue(Config::XPATH_FIELD_AUTOCOMPLETE));
+        return $this->getServiceUrl($imageUrl, 'w=' . $width . '&h=' . $height . '&auto=compress&auto=format');
     }
 
     public function getServiceUrl(string $currentUrl, string $params): string

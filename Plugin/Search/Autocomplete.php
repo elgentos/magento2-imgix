@@ -7,12 +7,15 @@ use Magento\Framework\Controller\ResultFactory;
 class Autocomplete
 {
     private $image;
+    private $viewConfigHelper;
 
     public function __construct(
-        \Elgentos\Imgix\Model\Image $image
+        \Elgentos\Imgix\Model\Image $image,
+        \Elgentos\Imgix\Helper\ViewConfigHelper $viewConfigHelper
     )
     {
         $this->image = $image;
+        $this->viewConfigHelper = $viewConfigHelper;
     }
 
     public function afterGetItems($subject, array $resultItems)
@@ -22,10 +25,17 @@ class Autocomplete
         }
 
         foreach ($resultItems as $item) {
-            if(! $item->getData('image')) {
+            if (!$item->getData('image')) {
                 continue;
             }
-            $item->setData('image', $this->image->getAutoCompleteUrl($item->getData('image')));
+            $imageId = $item->getData('image_id');
+            if (!$imageId) {
+                $imageId = 'product_page_image_small'; // Fallback to default image ID
+            }
+
+            $dimensions = $this->viewConfigHelper->getImageSize($imageId);
+            $imgixUrl = $this->image->getCustomUrl($item->getData('image'), $dimensions['width'], $dimensions['height']);
+            $item->setData('image', $imgixUrl);
         }
 
         return $resultItems;
