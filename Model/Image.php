@@ -27,7 +27,15 @@ class Image
         $trimOption = $this->config->getConfigValue(Config::XPATH_FIELD_TRIM);
         $trimParam = $trimOption ? '&trim=' . $trimOption : '';
 
-        return $this->getServiceUrl($imageUrl, 'w=' . $width . '&h=' . $height . '&auto=compress&auto=format' . $trimParam);
+        return $this->getServiceUrl(
+            $imageUrl,
+            sprintf(
+                'w=%d&h=%d&auto=compress&auto-format%s',
+                $width,
+                $height,
+                $trimOption ? sprintf('&trim=%s', $trimOption) : ''
+            )
+        );
     }
 
     public function getServiceUrl(string $currentUrl, string $params): string
