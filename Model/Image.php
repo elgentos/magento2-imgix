@@ -25,7 +25,6 @@ class Image
     public function getCustomUrl(string $imageUrl, int $width, int $height): string
     {
         $trimOption = $this->config->getConfigValue(Config::XPATH_FIELD_TRIM);
-        $trimParam = $trimOption ? '&trim=' . $trimOption : '';
 
         return $this->getServiceUrl(
             $imageUrl,
