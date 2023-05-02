@@ -5,6 +5,7 @@
         <elgentos>
             <imgix>
                 <enabled>0</enabled>
+                <trim/>
             </imgix>
         </elgentos>
     </default>

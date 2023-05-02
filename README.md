@@ -13,13 +13,7 @@ You need to create a [Imgix account](https://dashboard.imgix.com/sign-up) in ord
 
 Go to Stores > Configuration > Elgentos > Imgix. You should set your host URL for the image service (for example `https://yoursubdomain.imgix.net/`). You can find this value under [Sources](https://dashboard.imgix.com/sources) in your Imgix dashboard.
 
-You can set separate image options for large images and for small images, according to Imgix's [documentation](https://docs.imgix.com/apis/url), such as [width](https://docs.imgix.com/apis/url/size/w), [height](https://docs.imgix.com/apis/url/size/h), [aspect ratio](https://docs.imgix.com/apis/url/size/ar), [watermarks](https://docs.imgix.com/apis/url/watermark) or even [face detection](https://docs.imgix.com/apis/url/face-detection).
-
-Example value for large images; `w=500&h=500&fit=fillmax&fill=solid&fill-color=ffffff&lossless=1&auto=compress`
-
-Example value for small images; `w=240&h=240&fit=fillmax&trim=auto&trim-sd=3&trim-md=3&lossless=1&auto=compress`
-
-Magento's medium images are processed according to the large images rule.
+There's also the option to set trimming of the image. The options are: No trimming, auto and color. You can find more info [here](https://docs.imgix.com/apis/rendering/trim/trim)
 
 ## Imgix costs
 
