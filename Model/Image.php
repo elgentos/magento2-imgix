@@ -24,7 +24,10 @@ class Image
 
     public function getCustomUrl(string $imageUrl, int $width, int $height): string
     {
-        return $this->getServiceUrl($imageUrl, 'w=' . $width . '&h=' . $height . '&auto=compress&auto=format');
+        $trimOption = $this->config->getConfigValue(Config::XPATH_FIELD_TRIM);
+        $trimParam = $trimOption ? '&trim=' . $trimOption : '';
+
+        return $this->getServiceUrl($imageUrl, 'w=' . $width . '&h=' . $height . '&auto=compress&auto=format' . $trimParam);
     }
 
     public function getServiceUrl(string $currentUrl, string $params): string

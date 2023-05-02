@@ -22,6 +22,11 @@
                        showInStore="1">
                     <label>Host url image service</label>
                 </field>
+                <field id="trim" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Trim</label>
+                    <source_model>Elgentos\Imgix\Model\Config\Source\Trim</source_model>
+                    <comment><![CDATA[Select trim option for Imgix images.]]></comment>
+                </field>
                 <field id="secure_sign_key" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1"
                        showInStore="1">
                     <label>Secure Images Sign Key</label>
