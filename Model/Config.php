@@ -11,6 +11,7 @@ class Config
     const XPATH_FIELD_ENABLED = 'enabled';
     const XPATH_FIELD_SERVICE_URL = 'host';
     const XPATH_FIELD_SIGN_KEY = 'secure_sign_key';
+    const XPATH_FIELD_TRIM = 'trim';
 
     /**
      * @var \Magento\Framework\App\Config\ScopeConfigInterface
