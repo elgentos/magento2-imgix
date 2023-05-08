@@ -22,8 +22,8 @@ class ViewConfigHelper extends AbstractHelper
     {
         $imageConfig = $this->viewConfig->getMediaAttributes('Magento_Catalog', 'images', $imageId);
         return [
-            'width' => $imageConfig['width'],
-            'height' => $imageConfig['height'],
+            'width' => $imageConfig['width'] ?? 700,
+            'height' => $imageConfig['height'] ?? 700,
         ];
     }
 }
