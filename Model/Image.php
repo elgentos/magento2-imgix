@@ -2,21 +2,18 @@
 
 namespace Elgentos\Imgix\Model;
 
+use Imgix\UrlBuilder;
+use Magento\Store\Model\StoreManagerInterface;
+
 class Image
 {
-    /**
-     * @var Config
-     */
-    protected $config;
+    protected Config $config;
 
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    protected $storeManager;
+    protected StoreManagerInterface $storeManager;
 
     public function __construct(
         Config $config,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
+        StoreManagerInterface $storeManager
     ) {
         $this->config = $config;
         $this->storeManager = $storeManager;
@@ -24,16 +21,9 @@ class Image
 
     public function getCustomUrl(string $imageUrl, int $width, int $height): string
     {
-        $trimOption = $this->config->getConfigValue(Config::XPATH_FIELD_TRIM);
-
         return $this->getServiceUrl(
             $imageUrl,
-            sprintf(
-                'w=%d&h=%d&auto=compress&auto-format%s',
-                $width,
-                $height,
-                $trimOption ? sprintf('&trim=%s', $trimOption) : ''
-            )
+            $this->generateImageUrlParams($width, $height)
         );
     }
 
@@ -63,8 +53,21 @@ class Image
             return false;
         }
 
-        $builder = new \Imgix\UrlBuilder($host);
+        $builder = new UrlBuilder($host);
         $builder->setSignKey($this->config->getConfigValue(Config::XPATH_FIELD_SIGN_KEY));
         return $builder->createURL($url, $params);
+    }
+
+    private function generateImageUrlParams(int $width, int $height): string
+    {
+        $params = [
+            'w' => $width,
+            'h' => $height,
+            'auto' => 'compress',
+            'trim' => $this->config->getConfigValue(Config::XPATH_FIELD_TRIM) ?: null,
+            'fit' => $this->config->getConfigValue(Config::XPATH_FIELD_FIT) ?: null
+        ];
+
+        return http_build_query($params);
     }
 }

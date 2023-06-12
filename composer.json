@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "php": "^7.4|^8.1",
         "imgix/imgix-php": "^3.3.0"
     },
     "minimum-stability": "dev",
