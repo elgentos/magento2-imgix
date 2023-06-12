@@ -2,6 +2,7 @@
 
 namespace Elgentos\Imgix\Model;
 
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
 class Config
@@ -12,15 +13,11 @@ class Config
     const XPATH_FIELD_SERVICE_URL = 'host';
     const XPATH_FIELD_SIGN_KEY = 'secure_sign_key';
     const XPATH_FIELD_TRIM = 'trim';
+    const XPATH_FIELD_FIT = 'fit';
 
-    /**
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
-     */
-    protected $scopeConfig;
+    protected ScopeConfigInterface $scopeConfig;
 
-    public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-    )
+    public function __construct(ScopeConfigInterface $scopeConfig)
     {
         $this->scopeConfig = $scopeConfig;
     }
@@ -28,7 +25,9 @@ class Config
     public function getConfigValue($field, $prefix = self::XML_PATH, $storeId = null)
     {
         return $this->scopeConfig->getValue(
-            $prefix . $field, ScopeInterface::SCOPE_STORE, $storeId
+            $prefix . $field,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
         );
     }
 

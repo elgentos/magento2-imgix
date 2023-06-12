@@ -18,16 +18,21 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <label>Enabled</label>
                 </field>
-                <field id="host" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1"
+                <field id="host" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
                        showInStore="1">
                     <label>Host url image service</label>
                 </field>
-                <field id="trim" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="trim" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Trim</label>
                     <source_model>Elgentos\Imgix\Model\Config\Source\Trim</source_model>
-                    <comment><![CDATA[Select trim option for Imgix images.]]></comment>
+                    <comment><![CDATA[Select trim option for Imgix images. See: https://docs.imgix.com/apis/rendering/trim/trim]]></comment>
                 </field>
-                <field id="secure_sign_key" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1"
+                <field id="fit" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Resize Fit Mode</label>
+                    <source_model>Elgentos\Imgix\Model\Config\Source\Fit</source_model>
+                    <comment><![CDATA[Select fit option for Imgix images. See: https://docs.imgix.com/apis/rendering/size/fit]]></comment>
+                </field>
+                <field id="secure_sign_key" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
                        showInStore="1">
                     <label>Secure Images Sign Key</label>
                     <comment>See https://docs.imgix.com/setup/securing-images</comment>
