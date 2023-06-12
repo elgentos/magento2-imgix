@@ -1,0 +1,25 @@
+name: "Feature Request"
+description: "Create a new ticket for a feature request"
+title: "[FEATURE]: "
+labels: ["feature"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "User Story"
+      description: "Please write down the user story in the given format"
+      value: |
+        As a [role] I would like [feature], so that I [reason].
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Acceptance Criteria"
+      description: "Write down the acceptance criteria that need to be met"
+      value: |
+        - [ ] Requirement 1
+        - [ ] Requirement 2
+        ...
+    validations:
+      required: true
