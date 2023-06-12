@@ -1,0 +1,45 @@
+name: "Bug Report"
+description: "File a new bug report"
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: "Description"
+      description: "Please enter an explicit description of your issue"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: "Steps to Reproduce"
+      description: "Write down the steps to reproduce the issue"
+      value: |
+        1. Step 1
+        2. Step 2
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: "Expected Results"
+      description: "Write down the result you expected to happen"
+      value: |
+        1. Expected result 1
+        2. Expected result 2
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: "Actual Results"
+      description: "Write down the actual result that happened"
+      value: |
+        1. Actual result 1
+        2. Actual result 2
+        ...
+    validations:
+      required: true
