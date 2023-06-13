@@ -2,6 +2,7 @@
 
 namespace Elgentos\Imgix\Model;
 
+use Elgentos\Imgix\Model\Config\Source\Fit;
 use Imgix\UrlBuilder;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -67,6 +68,13 @@ class Image
             'trim' => $this->config->getConfigValue(Config::XPATH_FIELD_TRIM) ?: null,
             'fit' => $this->config->getConfigValue(Config::XPATH_FIELD_FIT) ?: null
         ];
+
+        if (
+            $this->config->getConfigValue(Config::XPATH_FIELD_FIT) === Fit::MODE_FILL ||
+            $this->config->getConfigValue(Config::XPATH_FIELD_FIT) === Fit::MODE_FILL_MAX
+        ) {
+            $params['fill'] = 'solid';
+        }
 
         return http_build_query($params);
     }
