@@ -2,24 +2,71 @@
     "name": "elgentos/magento2-imgix",
     "description": "Imgix extension for Magento 2 to process images",
     "type": "magento2-module",
+    "license": "MIT",
+    "minimum-stability": "stable",
     "authors": [
         {
-            "name": "elgentos",
+            "name": "elgentos ecommerce solutions",
             "email": "info@elgentos.nl"
         }
     ],
     "require": {
         "php": "^7.4|^8.1",
-        "imgix/imgix-php": "^3.3.0"
+        "imgix/imgix-php": "^3.3.0",
+        "magento/framework": "^103.0",
+        "magento/module-store": "^101.1",
+        "magento/module-catalog-graph-ql": "^100.4",
+        "magento/module-search": "^101.1"
     },
-    "minimum-stability": "dev",
+    "require-dev": {
+        "elgentos/testing-suite": "*",
+        "phpunit/phpunit": "^9.6",
+        "youwe/coding-standard-magento2": "^2.0.0"
+    },
+    "repositories": {
+        "magento": {
+            "type": "composer",
+            "url": "https://repo.magento.com"
+        }
+    },
     "autoload": {
         "psr-4": {
-            "Elgentos\\Imgix\\": ""
+            "Elgentos\\Imgix\\": "src/"
         },
         "files": [
-            "registration.php"
+            "src/registration.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Elgentos\\Imgix\\Test\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "magento/composer-dependency-version-audit-plugin": true,
+            "magento/magento-composer-installer": true,
+            "elgentos/coding-standard-phpstorm": true,
+            "phpro/grumphp-shim": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "youwe/testing-suite": true,
+            "digitalrevolution/php-codesniffer-baseline": true
+        }
+    },
+    "archive": {
+        "exclude": [
+            "/.gitignore",
+            "/tests",
+            "/grumphp.yml",
+            "/pdepend.xml",
+            "/phpstan.neon",
+            "/phpunit.xml",
+            "/phpcs.xml",
+            "/phpmd.xml",
+            "/package.json",
+            "/.eslintrc.json",
+            "/.eslintignore"
         ]
     }
-
 }
