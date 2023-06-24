@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\Imgix\Model\Config\Source;
+namespace Elgentos\Imgproxy\Model\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 

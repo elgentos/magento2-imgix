@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\Imgix\Model;
+namespace Elgentos\Imgproxy\Model;
 
-use Imgix\UrlBuilder;
+use Imgproxy\UrlBuilder;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -43,7 +43,7 @@ class Image
             return $currentUrl;
         }
 
-        $serviceUrl = $this->config->getImgixHost();
+        $serviceUrl = $this->config->getImgproxyHost();
 
         if (empty($serviceUrl)) {
             return $currentUrl;
@@ -62,7 +62,7 @@ class Image
     public function getSignedUrl(string $url, array $params = []): ?string
     {
         $host = parse_url(
-            $this->config->getImgixHost(),
+            $this->config->getImgproxyHost(),
             PHP_URL_HOST
         );
 

@@ -6,6 +6,6 @@ use Magento\Framework\Component\ComponentRegistrar;
 
 ComponentRegistrar::register(
     ComponentRegistrar::MODULE,
-    'Elgentos_Imgix',
+    'Elgentos_Imgproxy',
     __DIR__
 );

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\Imgix\Model;
+namespace Elgentos\Imgproxy\Model;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 
 class Config
 {
-    private const XPATH_FIELD_ENABLED = 'elgentos/imgix/enabled',
-        XPATH_FIELD_SERVICE_URL = 'elgentos/imgix/host',
-        XPATH_FIELD_SIGN_KEY = 'elgentos/imgix/secure_sign_key',
-        XPATH_FIELD_TRIM = 'elgentos/imgix/trim',
-        XPATH_FIELD_FIT = 'elgentos/imgix/fit';
+    private const XPATH_FIELD_ENABLED = 'elgentos/imgproxy/enabled',
+        XPATH_FIELD_SERVICE_URL = 'elgentos/imgproxy/host',
+        XPATH_FIELD_SIGN_KEY = 'elgentos/imgproxy/secure_sign_key',
+        XPATH_FIELD_TRIM = 'elgentos/imgproxy/trim',
+        XPATH_FIELD_FIT = 'elgentos/imgproxy/fit';
 
     protected ScopeConfigInterface $scopeConfig;
 
@@ -30,7 +30,7 @@ class Config
         );
     }
 
-    public function getImgixHost(?int $storeId = null): ?string
+    public function getImgproxyHost(?int $storeId = null): ?string
     {
         return $this->scopeConfig->getValue(
             self::XPATH_FIELD_SERVICE_URL,

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\Imgix\Block;
+namespace Elgentos\Imgproxy\Block;
 
-use Elgentos\Imgix\Model\Config;
+use Elgentos\Imgproxy\Model\Config;
 use Magento\Framework\View\Element\Template;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -27,6 +27,6 @@ class Preconnect extends Template
 
     public function getHost(): string
     {
-        return $this->config->getImgixHost();
+        return $this->config->getImgproxyHost();
     }
 }

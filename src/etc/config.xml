@@ -3,10 +3,10 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <elgentos>
-            <imgix>
+            <imgproxy>
                 <enabled>0</enabled>
                 <trim/>
-            </imgix>
+            </imgproxy>
         </elgentos>
     </default>
 </config>

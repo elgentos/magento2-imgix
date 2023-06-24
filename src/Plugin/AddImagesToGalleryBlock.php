@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\Imgix\Plugin;
+namespace Elgentos\Imgproxy\Plugin;
 
-use Elgentos\Imgix\Model\Config;
-use Elgentos\Imgix\Model\Image;
+use Elgentos\Imgproxy\Model\Config;
+use Elgentos\Imgproxy\Model\Image;
 use Exception;
 use Magento\Catalog\Block\Product\View\Gallery;
-use Elgentos\Imgix\Helper\ViewConfigHelper;
+use Elgentos\Imgproxy\Helper\ViewConfigHelper;
 use Magento\Framework\Data\Collection;
 
 class AddImagesToGalleryBlock
@@ -63,7 +63,7 @@ class AddImagesToGalleryBlock
 
                 foreach ($imageIds as $size => $imageId) {
                     $dimensions = $this->viewConfigHelper->getImageSize($imageId);
-                    $imgixUrl   = $this->image->getCustomUrl(
+                    $imgproxyUrl   = $this->image->getCustomUrl(
                         $image->getUrl(),
                         $dimensions['width'],
                         $dimensions['height']
@@ -71,19 +71,19 @@ class AddImagesToGalleryBlock
 
                     switch ($size) {
                         case 'small':
-                            $image->setSmallImageUrl($imgixUrl);
+                            $image->setSmallImageUrl($imgproxyUrl);
                             break;
 
                         case 'medium':
-                            $image->setMediumImageUrl($imgixUrl);
+                            $image->setMediumImageUrl($imgproxyUrl);
                             break;
 
                         case 'large':
-                            $image->setLargeImageUrl($imgixUrl);
+                            $image->setLargeImageUrl($imgproxyUrl);
                             break;
 
                         default:
-                            $image->setUrl($imgixUrl);
+                            $image->setUrl($imgproxyUrl);
                             break;
                     }
                 }

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\Imgix\Plugin\CatalogGraphQl;
+namespace Elgentos\Imgproxy\Plugin\CatalogGraphQl;
 
-use Elgentos\Imgix\Helper\ViewConfigHelper;
-use Elgentos\Imgix\Model\Config;
-use Elgentos\Imgix\Model\Image;
+use Elgentos\Imgproxy\Helper\ViewConfigHelper;
+use Elgentos\Imgproxy\Model\Config;
+use Elgentos\Imgproxy\Model\Image;
 use Magento\CatalogGraphQl\Model\Resolver\Product\MediaGallery\Url;
 use Magento\Framework\GraphQl\Config\Element\Field;
 use Magento\Framework\GraphQl\Query\Resolver\ContextInterface;

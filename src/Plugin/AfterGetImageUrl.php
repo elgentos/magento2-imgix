@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\Imgix\Plugin;
+namespace Elgentos\Imgproxy\Plugin;
 
-use Elgentos\Imgix\Model\Config;
-use Elgentos\Imgix\Model\Image as ImgixImage;
+use Elgentos\Imgproxy\Model\Config;
+use Elgentos\Imgproxy\Model\Image as ImgproxyImage;
 use Exception;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Block\Product\Image;
 use Magento\Catalog\Helper\ImageFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Elgentos\Imgix\Helper\ViewConfigHelper as ViewConfig;
+use Elgentos\Imgproxy\Helper\ViewConfigHelper as ViewConfig;
 
 // phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
 // phpcs:disable Generic.NamingConventions.CamelCapsFunctionName.ScopeNotCamelCaps
 
 class AfterGetImageUrl
 {
-    protected ImgixImage $image;
+    protected ImgproxyImage $image;
 
     protected ProductRepositoryInterface $productRepository;
 
@@ -30,7 +30,7 @@ class AfterGetImageUrl
     private Config $config;
 
     public function __construct(
-        ImgixImage $image,
+        ImgproxyImage $image,
         ProductRepositoryInterface $productRepository,
         ImageFactory $imageHelperFactory,
         ViewConfig $viewConfigHelper,
