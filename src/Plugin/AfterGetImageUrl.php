@@ -69,7 +69,7 @@ class AfterGetImageUrl
         $dimensions   = $this->viewConfigHelper->getImageSize($imageId);
 
         try {
-            $defaultImage = $this->getDefaultImageUrl($image->getData('product_id'));
+            $defaultImage = $this->getDefaultImageUrl((int) $image->getData('product_id'));
 
             if (!$defaultImage) {
                 return $result;
