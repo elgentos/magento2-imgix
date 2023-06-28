@@ -2,12 +2,12 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="">
+        <referenceBlock name="head.additional">
             <block ifconfig="elgentos/imgix/enabled"
                    name="imgix.head.preconnect"
                    class="Elgentos\Imgix\Block\Preconnect"
                    template="Elgentos_Imgix::preconnect.phtml"
             />
-        </referenceContainer>
+        </referenceBlock>
     </body>
 </page>
