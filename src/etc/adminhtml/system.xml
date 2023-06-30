@@ -10,7 +10,7 @@
             <label>Imgproxy</label>
             <tab>elgentos</tab>
             <resource>Elgentos_Imgproxy::config</resource>
-            <group id="imgproxy" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="imgproxy" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Settings</label>
                 <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
