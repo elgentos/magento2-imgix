@@ -27,6 +27,6 @@ class Preconnect extends Template
 
     public function getHost(): string
     {
-        return $this->config->getImgproxyHost();
+        return $this->config->getImgproxyHost() ?? '';
     }
 }
