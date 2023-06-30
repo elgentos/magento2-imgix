@@ -5,7 +5,6 @@
         <elgentos>
             <imgproxy>
                 <enabled>0</enabled>
-                <trim/>
             </imgproxy>
         </elgentos>
     </default>

@@ -37,7 +37,7 @@ class Image
 
     public function getServiceUrl(
         string $currentUrl,
-        string $params
+        array $params
     ): string {
         if (!$this->config->isEnabled()) {
             return $currentUrl;
@@ -76,16 +76,11 @@ class Image
         return $builder->createURL($url, $params);
     }
 
-    private function generateImageUrlParams(int $width, int $height): string
+    private function generateImageUrlParams(int $width, int $height): array
     {
-        $params = [
+        return [
             'w' => $width,
             'h' => $height,
-            'auto' => 'compress',
-            'trim' => $this->config->getTrimMode(),
-            'fit' => $this->config->getFitMode()
         ];
-
-        return http_build_query($params);
     }
 }

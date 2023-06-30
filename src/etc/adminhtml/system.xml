@@ -19,16 +19,6 @@
                 <field id="host" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Host url image service</label>
                 </field>
-                <field id="trim" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Trim</label>
-                    <source_model>Elgentos\Imgproxy\Model\Config\Source\Trim</source_model>
-                    <comment><![CDATA[Select trim option for Imgproxy images. See: https://docs.imgproxy.com/apis/rendering/trim/trim]]></comment>
-                </field>
-                <field id="fit" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Resize Fit Mode</label>
-                    <source_model>Elgentos\Imgproxy\Model\Config\Source\Fit</source_model>
-                    <comment><![CDATA[Select fit option for Imgproxy images. See: https://docs.imgproxy.com/apis/rendering/size/fit]]></comment>
-                </field>
                 <field id="secure_sign_key" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Secure Images Sign Key</label>
                     <comment>See https://docs.imgproxy.com/setup/securing-images</comment>
