@@ -21,7 +21,7 @@
                 </field>
                 <field id="secure_sign_key" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Secure Images Sign Key</label>
-                    <comment>See https://docs.imgproxy.com/setup/securing-images</comment>
+                    <comment>See https://docs.imgproxy.net/setup/securing-images</comment>
                 </field>
             </group>
         </section>
