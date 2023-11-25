@@ -9,11 +9,14 @@ use Magento\Store\Model\ScopeInterface;
 
 class Config
 {
-    private const XPATH_FIELD_ENABLED = 'elgentos/imgproxy/enabled',
-        XPATH_FIELD_SERVICE_URL = 'elgentos/imgproxy/host',
-        XPATH_FIELD_SIGN_KEY = 'elgentos/imgproxy/secure_sign_key',
-        XPATH_FIELD_TRIM = 'elgentos/imgproxy/trim',
-        XPATH_FIELD_FIT = 'elgentos/imgproxy/fit';
+    private const IMGPROXY_GENERAL_ENABLED = 'imgproxy/general/enabled',
+        IMGPROXY_GENERAL_HOST              = 'imgproxy/general/host',
+        IMGPROXY_GENERAL_SECURE_SIGN_KEY   = 'imgproxy/general/secure_sign_key',
+        IMGPROXY_GENERAL_SECURE_SIGN_SALT  = 'imgproxy/general/secure_sign_salt',
+        IMGPROXY_PARAMS_ENLARGE            = 'imgproxy/params/enlarge',
+        IMGPROXY_PARAMS_RESIZING_TYPE      = 'imgproxy/params/resizing_type',
+        IMGPROXY_DEV_ENABLED               = 'imgproxy/dev/enabled',
+        IMGPROXY_DEV_PRODUCTION_MEDIA_URL  = 'imgproxy/dev/production_media_url';
 
     protected ScopeConfigInterface $scopeConfig;
 
@@ -25,7 +28,7 @@ class Config
     public function isEnabled(): bool
     {
         return $this->scopeConfig->isSetFlag(
-            self::XPATH_FIELD_ENABLED,
+            self::IMGPROXY_GENERAL_ENABLED,
             ScopeInterface::SCOPE_STORE
         );
     }
@@ -33,7 +36,25 @@ class Config
     public function getImgproxyHost(?int $storeId = null): ?string
     {
         return $this->scopeConfig->getValue(
-            self::XPATH_FIELD_SERVICE_URL,
+            self::IMGPROXY_GENERAL_HOST,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        ) ?: null;
+    }
+
+    public function getDevMode(?int $storeId = null): bool
+    {
+        return (bool) $this->scopeConfig->getValue(
+            self::IMGPROXY_DEV_ENABLED,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
+
+    public function getProductionMediaUrl(?int $storeId = null): ?string
+    {
+        return $this->scopeConfig->getValue(
+            self::IMGPROXY_DEV_PRODUCTION_MEDIA_URL,
             ScopeInterface::SCOPE_STORE,
             $storeId
         ) ?: null;
@@ -42,25 +63,34 @@ class Config
     public function getSignKey(?int $storeId = null): ?string
     {
         return $this->scopeConfig->getValue(
-            self::XPATH_FIELD_SIGN_KEY,
+            self::IMGPROXY_GENERAL_SECURE_SIGN_KEY,
             ScopeInterface::SCOPE_STORE,
             $storeId
         ) ?: null;
     }
 
-    public function getTrimMode(?int $storeId = null): string
+    public function getSignSalt(?int $storeId = null): ?string
     {
         return $this->scopeConfig->getValue(
-            self::XPATH_FIELD_TRIM,
+            self::IMGPROXY_GENERAL_SECURE_SIGN_SALT,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        ) ?: null;
+    }
+
+    public function getEnlargeMode(?int $storeId = null): bool
+    {
+        return (bool) $this->scopeConfig->getValue(
+            self::IMGPROXY_PARAMS_ENLARGE,
             ScopeInterface::SCOPE_STORE,
             $storeId
         );
     }
 
-    public function getFitMode(?int $storeId = null): string
+    public function getResizingType(?int $storeId = null): string
     {
         return $this->scopeConfig->getValue(
-            self::XPATH_FIELD_FIT,
+            self::IMGPROXY_PARAMS_RESIZING_TYPE,
             ScopeInterface::SCOPE_STORE,
             $storeId
         );

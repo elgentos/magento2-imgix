@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Elgentos\Imgproxy\Model;
 
+use Elgentos\Imgproxy\Service\Curl;
+use Exception;
 use Imgproxy\UrlBuilder;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
@@ -12,16 +14,11 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class Image
 {
-    protected Config $config;
-
-    protected StoreManagerInterface $storeManager;
-
     public function __construct(
-        Config $config,
-        StoreManagerInterface $storeManager
+        private readonly Config $config,
+        private readonly StoreManagerInterface $storeManager,
+        private readonly Curl $curl
     ) {
-        $this->config       = $config;
-        $this->storeManager = $storeManager;
     }
 
     public function getCustomUrl(
@@ -52,28 +49,49 @@ class Image
         /** @var Store $store */
         $store = $this->storeManager->getStore();
 
-        return str_replace(
-            $store->getBaseUrl(),
-            $serviceUrl,
-            $currentUrl
-        ) . '?' . $params;
-    }
-
-    public function getSignedUrl(string $url, array $params = []): ?string
-    {
-        $host = parse_url(
-            $this->config->getImgproxyHost(),
-            PHP_URL_HOST
-        );
-
-        if (!$host) {
-            return null;
+        if ($this->config->getDevMode() && $this->config->getProductionMediaUrl()) {
+            $baseDomain = parse_url(
+                $store->getBaseUrl(),
+                PHP_URL_HOST
+            );
+            $productionMediaDomain = parse_url(
+                $this->config->getProductionMediaUrl(),
+                PHP_URL_HOST
+            );
+            $currentUrl = str_replace($baseDomain, $productionMediaDomain, $currentUrl);
         }
 
-        $builder = new UrlBuilder($host);
-        $builder->setSignKey($this->config->getSignKey());
+        try {
+            $builder = new UrlBuilder(
+                $serviceUrl,
+                $this->config->getSignKey(),
+                $this->config->getSignSalt()
+            );
+        } catch (Exception $e) {
+            return $currentUrl;
+        }
 
-        return $builder->createURL($url, $params);
+        $url = $builder->build(
+            $currentUrl,
+            ...$params
+        );
+        $url->useAdvancedMode();
+
+        $imgProxyUrl = $url->toString();
+
+        try {
+            $request = $this->curl->head($imgProxyUrl);
+            var_dump($imgProxyUrl);
+            var_dump($this->curl->getHeaders());
+            if ($this->curl->getStatus() !== 200) {
+                return $currentUrl;
+            }
+        } catch (Exception $e) {
+            return $currentUrl;
+        }
+        var_dump($url, $params);exit;
+
+        return $imgProxyUrl;
     }
 
     private function generateImageUrlParams(int $width, int $height): array
@@ -81,6 +99,8 @@ class Image
         return [
             'w' => $width,
             'h' => $height,
+            'fit' => $this->config->getResizingType(),
+            'enlarge' => $this->config->getEnlargeMode()
         ];
     }
 }

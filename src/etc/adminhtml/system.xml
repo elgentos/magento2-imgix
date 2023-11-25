@@ -5,23 +5,74 @@
         <tab id="elgentos" translate="label" sortOrder="100">
             <label>Elgentos</label>
         </tab>
-        <section id="elgentos" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="imgproxy" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
             <class>separator-top</class>
             <label>Imgproxy</label>
             <tab>elgentos</tab>
             <resource>Elgentos_Imgproxy::config</resource>
-            <group id="imgproxy" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Settings</label>
+            <group id="general" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
                 <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <label>Enabled</label>
                 </field>
                 <field id="host" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Host url image service</label>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="imgproxy/general/enabled">1</field>
+                    </depends>
                 </field>
-                <field id="secure_sign_key" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="secure_sign_key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Secure Images Sign Key</label>
-                    <comment>See https://docs.imgproxy.net/setup/securing-images</comment>
+                    <comment><![CDATA[See https://docs.imgproxy.net/usage/signing_url]]></comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="imgproxy/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="secure_sign_salt" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Secure Images Sign Salt</label>
+                    <comment><![CDATA[See https://docs.imgproxy.net/usage/signing_url]]></comment>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="imgproxy/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="params" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <depends>
+                    <field id="imgproxy/general/enabled">1</field>
+                </depends>
+                <label>Image Generation Parameters</label>
+                <field id="resizing_type" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Elgentos\Imgproxy\Model\Config\Source\ResizingType</source_model>
+                    <label>Resizing type</label>
+                    <comment><![CDATA[For more info, see the <a href="https://docs.imgproxy.net/usage/processing#resizing-type" target="_blank">Imgproxy Resizing Type</a> documentation.]]></comment>
+                </field>
+                <field id="enlarge" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Enabled</label>
+                    <comment><![CDATA[For more info, see the <a href="https://docs.imgproxy.net/usage/processing#enlarge" target="_blank">Imgproxy Enlarge</a> documentation.]]></comment>
+                </field>
+            </group>
+            <group id="dev" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <depends>
+                    <field id="imgproxy/general/enabled">1</field>
+                </depends>
+                <label>Development mode</label>
+                <field id="enabled" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <label>Enabled</label>
+                    <comment><![CDATA[When enabled, fill out the production media URL so images are retrieved from a different source.]]></comment>
+                </field>
+                <field id="production_media_url" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Production media URL</label>
+                    <depends>
+                        <field id="imgproxy/dev/enabled">1</field>
+                    </depends>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[Only the host part of this URL is used]]></comment>
                 </field>
             </group>
         </section>
