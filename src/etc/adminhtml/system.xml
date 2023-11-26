@@ -52,8 +52,12 @@
                 </field>
                 <field id="enlarge" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <label>Enabled</label>
+                    <label>Enlarge</label>
                     <comment><![CDATA[For more info, see the <a href="https://docs.imgproxy.net/usage/processing#enlarge" target="_blank">Imgproxy Enlarge</a> documentation.]]></comment>
+                </field>
+                <field id="custom_processing_options" translate="label" type="text"  sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom processing options</label>
+                    <comment><![CDATA[Pass in extra processing options, see the <a href="https://docs.imgproxy.net/usage/processing#processing-options" target="_blank">Processing Options documentation</a> for more info]]></comment>
                 </field>
             </group>
             <group id="dev" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">

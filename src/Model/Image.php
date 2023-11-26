@@ -70,8 +70,19 @@ class Image
         if ($this->config->getEnlargeMode()) {
             $url->options()->withEnlarge();
         }
+
         $url->options()->withResizingType($this->config->getResizingType());
         $url->options()->withExtend('ce');
+
+        $customProcessingOptions = $this->config->getCustomProcessingOptions();
+        if ($customProcessingOptions) {
+            $options = array_map('trim', explode('/', $customProcessingOptions));
+            foreach ($options as $option) {
+                $arguments = explode(':', $option);
+                $name = array_shift($arguments);
+                $url->options()->set($name, ...$arguments);
+            }
+        }
 
         $imgProxyUrl = $url->toString();
 

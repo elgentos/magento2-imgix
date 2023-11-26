@@ -9,14 +9,15 @@ use Magento\Store\Model\ScopeInterface;
 
 class Config
 {
-    private const IMGPROXY_GENERAL_ENABLED = 'imgproxy/general/enabled',
-        IMGPROXY_GENERAL_HOST              = 'imgproxy/general/host',
-        IMGPROXY_GENERAL_SECURE_SIGN_KEY   = 'imgproxy/general/secure_sign_key',
-        IMGPROXY_GENERAL_SECURE_SIGN_SALT  = 'imgproxy/general/secure_sign_salt',
-        IMGPROXY_PARAMS_ENLARGE            = 'imgproxy/params/enlarge',
-        IMGPROXY_PARAMS_RESIZING_TYPE      = 'imgproxy/params/resizing_type',
-        IMGPROXY_DEV_ENABLED               = 'imgproxy/dev/enabled',
-        IMGPROXY_DEV_PRODUCTION_MEDIA_URL  = 'imgproxy/dev/production_media_url';
+    private const IMGPROXY_GENERAL_ENABLED         = 'imgproxy/general/enabled',
+        IMGPROXY_GENERAL_HOST                      = 'imgproxy/general/host',
+        IMGPROXY_GENERAL_SECURE_SIGN_KEY           = 'imgproxy/general/secure_sign_key',
+        IMGPROXY_GENERAL_SECURE_SIGN_SALT          = 'imgproxy/general/secure_sign_salt',
+        IMGPROXY_PARAMS_ENLARGE                    = 'imgproxy/params/enlarge',
+        IMGPROXY_PARAMS_RESIZING_TYPE              = 'imgproxy/params/resizing_type',
+        IMGPROXY_PARAMS_CUSTOM_PROCESSING_OPTIONS  = 'imgproxy/params/custom_processing_options',
+        IMGPROXY_DEV_ENABLED                       = 'imgproxy/dev/enabled',
+        IMGPROXY_DEV_PRODUCTION_MEDIA_URL          = 'imgproxy/dev/production_media_url';
 
     protected ScopeConfigInterface $scopeConfig;
 
@@ -97,5 +98,14 @@ class Config
             ScopeInterface::SCOPE_STORE,
             $storeId
         );
+    }
+
+    public function getCustomProcessingOptions(?int $storeId = null): string
+    {
+        return $this->scopeConfig->getValue(
+            self::IMGPROXY_PARAMS_CUSTOM_PROCESSING_OPTIONS,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        ) ?? '';
     }
 }

@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-<!--    <type name="Magento\CatalogGraphQl\Model\Resolver\Product\MediaGallery\Url">-->
-<!--        <plugin disabled="true" name="imgproxy_after_catalog_graphql_url_plugin" type="Elgentos\Imgproxy\Plugin\CatalogGraphQl\AfterMediaGalleryUrl"/>-->
-<!--    </type>-->
-</config>
