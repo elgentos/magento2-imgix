@@ -7,8 +7,8 @@ namespace Elgentos\Imgproxy\Service;
 class Curl extends \Magento\Framework\HTTP\Client\Curl
 {
     /**
-     * @param $uri
-     * @param $params
+     * @param       $uri
+     * @param array $params
      *
      * @return void
      */
@@ -16,10 +16,10 @@ class Curl extends \Magento\Framework\HTTP\Client\Curl
     {
         $this->setOptions([
             CURLOPT_URL => $uri,
-            CURLOPT_CUSTOMREQUEST => 'HEAD',
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_NOBODY => true
+            //CURLOPT_CUSTOMREQUEST => 'HEAD',
+            //CURLOPT_NOBODY => true
         ]);
-        $this->makeRequest('HEAD', $uri, $params);
+        $this->makeRequest('GET', $uri, $params);
     }
 }

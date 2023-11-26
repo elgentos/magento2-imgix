@@ -80,16 +80,13 @@ class Image
         $imgProxyUrl = $url->toString();
 
         try {
-            $request = $this->curl->head($imgProxyUrl);
-            var_dump($imgProxyUrl);
-            var_dump($this->curl->getHeaders());
+            $this->curl->head($imgProxyUrl);
             if ($this->curl->getStatus() !== 200) {
                 return $currentUrl;
             }
         } catch (Exception $e) {
             return $currentUrl;
         }
-        var_dump($url, $params);exit;
 
         return $imgProxyUrl;
     }
