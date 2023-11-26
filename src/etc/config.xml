@@ -5,7 +5,7 @@
         <imgproxy>
             <general>
                 <enabled>0</enabled>
-                <host>https://your.imgproxy.hostname/</host>
+                <host>https://your.imgproxy.hostname</host>
             </general>
             <params>
                 <enlarge>1</enlarge>

@@ -35,10 +35,13 @@ class Config
 
     public function getImgproxyHost(?int $storeId = null): ?string
     {
-        return $this->scopeConfig->getValue(
-            self::IMGPROXY_GENERAL_HOST,
-            ScopeInterface::SCOPE_STORE,
-            $storeId
+        return trim(
+            $this->scopeConfig->getValue(
+                self::IMGPROXY_GENERAL_HOST,
+                ScopeInterface::SCOPE_STORE,
+                $storeId
+            ),
+            '/'
         ) ?: null;
     }
 
