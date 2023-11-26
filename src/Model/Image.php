@@ -22,19 +22,9 @@ class Image
     }
 
     public function getCustomUrl(
-        string $imageUrl,
+        string $currentUrl,
         int $width,
         int $height
-    ): string {
-        return $this->getServiceUrl(
-            $imageUrl,
-            $this->generateImageUrlParams($width, $height)
-        );
-    }
-
-    public function getServiceUrl(
-        string $currentUrl,
-        array $params
     ): string {
         if (!$this->config->isEnabled()) {
             return $currentUrl;
@@ -73,11 +63,15 @@ class Image
             return $currentUrl;
         }
 
-        $url = $builder->build(
-            $currentUrl,
-            ...$params
-        );
+        $url = $builder->build($currentUrl, $width, $height);
+
         $url->useAdvancedMode();
+
+        if ($this->config->getEnlargeMode()) {
+            $url->options()->withEnlarge();
+        }
+        $url->options()->withResizingType($this->config->getResizingType());
+        $url->options()->withExtend('ce');
 
         $imgProxyUrl = $url->toString();
 
@@ -91,15 +85,5 @@ class Image
         }
 
         return $imgProxyUrl;
-    }
-
-    private function generateImageUrlParams(int $width, int $height): array
-    {
-        return [
-            'w' => $width,
-            'h' => $height,
-            'fit' => $this->config->getResizingType(),
-            'enlarge' => $this->config->getEnlargeMode()
-        ];
     }
 }
