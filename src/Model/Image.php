@@ -59,6 +59,8 @@ class Image
                 PHP_URL_HOST
             );
             $currentUrl = str_replace($baseDomain, $productionMediaDomain, $currentUrl);
+            // Strip out the cache hash
+            $currentUrl = preg_replace('/\/cache\/[a-f0-9]+/', '', $currentUrl);
         }
 
         try {
