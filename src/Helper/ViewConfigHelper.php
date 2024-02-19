@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\Imgix\Helper;
+namespace Elgentos\Imgproxy\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;

@@ -2,11 +2,15 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
+<<<<<<< HEAD
+        <referenceContainer name="head.additional">
+=======
         <referenceBlock name="head.additional">
-            <block ifconfig="elgentos/imgix/enabled"
-                   name="imgix.head.preconnect"
-                   class="Elgentos\Imgix\Block\Preconnect"
-                   template="Elgentos_Imgix::preconnect.phtml"
+>>>>>>> cf42a29 (Add link to correct container)
+            <block ifconfig="elgentos/imgproxy/enabled"
+                   name="imgproxy.head.preconnect"
+                   class="Elgentos\Imgproxy\Block\Preconnect"
+                   template="Elgentos_Imgproxy::preconnect.phtml"
             />
         </referenceBlock>
     </body>

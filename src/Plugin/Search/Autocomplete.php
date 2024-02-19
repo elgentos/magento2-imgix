@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\Imgix\Plugin\Search;
+namespace Elgentos\Imgproxy\Plugin\Search;
 
-use Elgentos\Imgix\Helper\ViewConfigHelper;
-use Elgentos\Imgix\Model\Config;
-use Elgentos\Imgix\Model\Image;
+use Elgentos\Imgproxy\Helper\ViewConfigHelper;
+use Elgentos\Imgproxy\Model\Config;
+use Elgentos\Imgproxy\Model\Image;
 use Magento\Search\Model\Autocomplete as AutocompleteModel;
 
 class Autocomplete

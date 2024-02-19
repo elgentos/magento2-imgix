@@ -2,11 +2,19 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <elgentos>
-            <imgix>
+        <imgproxy>
+            <general>
                 <enabled>0</enabled>
-                <trim/>
-            </imgix>
-        </elgentos>
+                <host>https://your.imgproxy.hostname</host>
+            </general>
+            <params>
+                <enlarge>1</enlarge>
+                <resizing_type>fit</resizing_type>
+            </params>
+            <dev>
+                <enabled>0</enabled>
+                <production_media_url>https://yourstore.com</production_media_url>
+            </dev>
+        </imgproxy>
     </default>
 </config>

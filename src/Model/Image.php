@@ -2,9 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Elgentos\Imgix\Model;
+namespace Elgentos\Imgproxy\Model;
 
-use Imgix\UrlBuilder;
+use Elgentos\Imgproxy\Service\Curl;
+use Exception;
+use Imgproxy\UrlBuilder;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 
@@ -12,38 +14,23 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class Image
 {
-    protected Config $config;
-
-    protected StoreManagerInterface $storeManager;
-
     public function __construct(
-        Config $config,
-        StoreManagerInterface $storeManager
+        private readonly Config $config,
+        private readonly StoreManagerInterface $storeManager,
+        private readonly Curl $curl
     ) {
-        $this->config       = $config;
-        $this->storeManager = $storeManager;
     }
 
     public function getCustomUrl(
-        string $imageUrl,
+        string $currentUrl,
         int $width,
         int $height
-    ): string {
-        return $this->getServiceUrl(
-            $imageUrl,
-            $this->generateImageUrlParams($width, $height)
-        );
-    }
-
-    public function getServiceUrl(
-        string $currentUrl,
-        string $params
     ): string {
         if (!$this->config->isEnabled()) {
             return $currentUrl;
         }
 
-        $serviceUrl = $this->config->getImgixHost();
+        $serviceUrl = $this->config->getImgproxyHost();
 
         if (empty($serviceUrl)) {
             return $currentUrl;
@@ -52,40 +39,62 @@ class Image
         /** @var Store $store */
         $store = $this->storeManager->getStore();
 
-        return str_replace(
-            $store->getBaseUrl(),
-            $serviceUrl,
-            $currentUrl
-        ) . '?' . $params;
-    }
-
-    public function getSignedUrl(string $url, array $params = []): ?string
-    {
-        $host = parse_url(
-            $this->config->getImgixHost(),
-            PHP_URL_HOST
-        );
-
-        if (!$host) {
-            return null;
+        if ($this->config->getDevMode() && $this->config->getProductionMediaUrl()) {
+            $baseDomain = parse_url(
+                $store->getBaseUrl(),
+                PHP_URL_HOST
+            );
+            $productionMediaDomain = parse_url(
+                $this->config->getProductionMediaUrl(),
+                PHP_URL_HOST
+            );
+            $currentUrl = str_replace($baseDomain, $productionMediaDomain, $currentUrl);
+            // Strip out the cache hash
+            $currentUrl = preg_replace('/\/cache\/[a-f0-9]+/', '', $currentUrl);
         }
 
-        $builder = new UrlBuilder($host);
-        $builder->setSignKey($this->config->getSignKey());
+        try {
+            $builder = new UrlBuilder(
+                $serviceUrl,
+                $this->config->getSignKey(),
+                $this->config->getSignSalt()
+            );
+        } catch (Exception $e) {
+            return $currentUrl;
+        }
 
-        return $builder->createURL($url, $params);
-    }
+        $url = $builder->build($currentUrl, $width, $height);
 
-    private function generateImageUrlParams(int $width, int $height): string
-    {
-        $params = [
-            'w' => $width,
-            'h' => $height,
-            'auto' => 'compress',
-            'trim' => $this->config->getTrimMode(),
-            'fit' => $this->config->getFitMode()
-        ];
+        $url->useAdvancedMode();
 
-        return http_build_query($params);
+        if ($this->config->getEnlargeMode()) {
+            $url->options()->withEnlarge();
+        }
+
+        $url->options()->withResizingType($this->config->getResizingType());
+        $url->options()->withExtend('ce');
+
+        $customProcessingOptions = $this->config->getCustomProcessingOptions();
+        if ($customProcessingOptions) {
+            $options = array_map('trim', explode('/', $customProcessingOptions));
+            foreach ($options as $option) {
+                $arguments = explode(':', $option);
+                $name = array_shift($arguments);
+                $url->options()->set($name, ...$arguments);
+            }
+        }
+
+        $imgProxyUrl = $url->toString();
+
+        try {
+            $this->curl->head($imgProxyUrl);
+            if ($this->curl->getStatus() !== 200) {
+                return $currentUrl;
+            }
+        } catch (Exception $e) {
+            return $currentUrl;
+        }
+
+        return $imgProxyUrl;
     }
 }
